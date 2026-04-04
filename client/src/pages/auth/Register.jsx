@@ -1,44 +1,91 @@
-import { useState } from "react";
-import { registerUser } from "../../services/authService";
-import toast from "react-hot-toast";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import Input from "../../components/ui/Input";
+import Button from "../../components/ui/Button";
+import Card from "../../components/ui/Card";
+import AuthLayout from "../../layouts/AuthLayout";
 
 const Register = () => {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [countryCode, setCountryCode] = useState("+91");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await registerUser(form);
-      toast.success("Registered Successfully 🎉");
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Error");
+  // 📍 Auto location fetch
+  const handleLocation = () => {
+    if (!navigator.geolocation) {
+      alert("Geolocation not supported");
+      return;
     }
+
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+      const { latitude, longitude } = pos.coords;
+
+      try {
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+        );
+        const data = await res.json();
+        setAddress(data.display_name);
+      } catch (err) {
+        console.log(err);
+        alert("Failed to fetch address");
+      }
+    });
   };
 
   return (
-    <div style={styles.container}>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <h2>Register</h2>
-        <input placeholder="Name" onChange={(e) => setForm({ ...form, name: e.target.value })} />
-        <input placeholder="Email" onChange={(e) => setForm({ ...form, email: e.target.value })} />
-        <input type="password" placeholder="Password" onChange={(e) => setForm({ ...form, password: e.target.value })} />
-        <button type="submit">Register</button>
-      </form>
-    </div>
-  );
-};
+    <AuthLayout>
+      <Card>
+        <h2 className="title">Create Account</h2>
+        <p className="subtitle">Start your journey</p>
 
-const styles = {
-  container: { display: "flex", justifyContent: "center", marginTop: "100px" },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-    padding: "30px",
-    background: "#1e293b",
-    color: "#fff",
-    borderRadius: "10px",
-  },
+        <Input label="Full Name" />
+
+        {/* 📍 Address with auto fetch */}
+        <div className="address-box">
+          <input
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
+          <span>Address</span>
+          <button className="loc-btn" onClick={handleLocation}>
+            📍
+          </button>
+        </div>
+
+        {/* 📱 Phone with country code */}
+        <div className="phone-box">
+          <select
+            value={countryCode}
+            onChange={(e) => setCountryCode(e.target.value)}
+          >
+            <option value="+91">🇮🇳 +91</option>
+            <option value="+1">🇺🇸 +1</option>
+            <option value="+44">🇬🇧 +44</option>
+            <option value="+61">🇦🇺 +61</option>
+          </select>
+
+          <input
+            type="number"
+            placeholder="Phone Number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </div>
+
+        <Input label="Email" type="email" />
+        <Input label="Password" type="password" />
+
+        <Button>Sign Up</Button>
+
+        <p className="link-text">
+          Already have an account? <Link to="/">Login</Link>
+        </p>
+      </Card>
+    </AuthLayout>
+  );
 };
 
 export default Register;

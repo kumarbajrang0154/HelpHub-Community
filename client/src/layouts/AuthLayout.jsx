@@ -1,17 +1,15 @@
-import Sidebar from "./Sidebar";
-import Topbar from "./Topbar";
-import { Outlet } from "react-router-dom";
+import React from "react";
+import NeuralBackground from "../components/animations/NeuralBackground";
 
-const Layout = () => {
+const AuthLayout = ({ children }) => {
   return (
-    <div style={{ display: "flex" }}>
-      <Sidebar />
-      <div style={{ flex: 1, background: "#0f172a", minHeight: "100vh", color: "#fff" }}>
-        <Topbar />
-        <Outlet />
+    <div className="auth-wrapper">
+      <NeuralBackground />
+      <div className="auth-center">
+        {children}
       </div>
     </div>
   );
 };
 
-export default Layout;
+export default AuthLayout;

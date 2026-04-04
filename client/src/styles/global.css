@@ -1,82 +1,205 @@
-@import "tailwindcss";
-
-/* Reset and Global Styles */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  color: #333;
-}
-
-/* Component Styles */
-@layer components {
-  .btn-primary {
-    @apply bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-all duration-300 inline-block;
-  }
-
-  .btn-secondary {
-    @apply bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-medium hover:bg-gray-300 transition-all duration-300 inline-block;
-  }
-
-  .card {
-    @apply bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6;
-  }
-
-  .section-title {
-    @apply text-4xl font-bold text-center mb-12 text-gray-900;
-  }
-
-  .container-max {
-    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-}
-
-/* Typography */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 600;
-  color: #1f2937;
-}
-
-h1 {
-  font-size: 2.25rem;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-}
-
-h2 {
-  font-size: 1.875rem;
-  line-height: 1.25;
-  margin-bottom: 1rem;
-}
-
-p {
   margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #020617;
+  color: white;
+  overflow: hidden;
 }
 
-/* Form Styles */
-input,
-select,
-textarea {
-  font-family: inherit;
+/* Wrapper */
+.auth-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
+/* Center container */
+.auth-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+  z-index: 2;
+}
+
+/* Card */
+.auth-card {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.85);
+  padding: 30px;
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 50px rgba(59, 130, 246, 0.25);
+}
+
+/* Text */
+.title {
+  margin-bottom: 5px;
+  font-size: 22px;
+}
+
+.subtitle {
+  color: #94a3b8;
+  margin-bottom: 20px;
+}
+
+.link-text {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.link-text a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+/* Input */
+.input-box {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 12px 12px;
+  background: transparent;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: white;
   outline: none;
 }
 
+.input-box span {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  transition: 0.3s;
+  pointer-events: none;
+}
+
+.input-box input:focus + span,
+.input-box input:valid + span {
+  top: -8px;
+  font-size: 12px;
+  color: #3b82f6;
+  background: #020617;
+  padding: 0 5px;
+}
+
+/* Button */
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #3b82f6;
+}
+
+/* Canvas fix */
+.neural-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Phone box */
+.phone-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.phone-box select {
+  padding: 10px;
+  background: #020617;
+  border: 1px solid #334155;
+  color: white;
+  border-radius: 8px;
+}
+
+.phone-box input {
+  flex: 1;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: white;
+}
+
+/* Address box */
+.address-box {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.address-box input {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: white;
+}
+
+.address-box span {
+  position: absolute;
+  left: 12px;
+  top: -8px;
+  font-size: 12px;
+  color: #3b82f6;
+  background: #020617;
+  padding: 0 5px;
+}
+
+.loc-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #2563eb;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.google-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: white;
+  color: black;
+  border-radius: 8px;
+  cursor: pointer;
+}
