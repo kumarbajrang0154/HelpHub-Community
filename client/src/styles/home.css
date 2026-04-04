@@ -1,0 +1,73 @@
+.section {
+  min-height: 100vh;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #020617, #0f172a);
+  color: white;
+}
+
+.hero-btns button {
+  margin: 10px;
+  padding: 12px 25px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+/* SERVICES */
+.services {
+  background: #1e293b;
+  color: white;
+}
+
+/* HOW */
+.how {
+  background: #0f172a;
+  color: white;
+}
+
+/* TEAM */
+.team {
+  background: #1e293b;
+  color: white;
+}
+
+/* CONTACT */
+.contact {
+  background: #020617;
+  color: white;
+}
+
+/* CARDS */
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.card {
+  padding: 20px;
+  background: #020617;
+  border-radius: 10px;
+  width: 200px;
+}
+
+/* STEPS */
+.steps {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.step {
+  background: #020617;
+  padding: 20px;
+  border-radius: 10px;
+}

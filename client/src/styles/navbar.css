@@ -1,0 +1,24 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #020617;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  z-index: 1000;
+}
+
+.logo {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nav-links button {
+  margin-left: 15px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}

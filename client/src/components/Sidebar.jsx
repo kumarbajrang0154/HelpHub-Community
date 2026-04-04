@@ -1,18 +1,17 @@
-import { Link } from "react-router-dom";
-import { FaHome, FaClipboardList } from "react-icons/fa";
+import React from "react";
 
 const Sidebar = () => {
   return (
-    <div style={styles.sidebar}>
-      <h2 style={styles.logo}>CodeHelp 🚀</h2>
-
-      <Link to="/dashboard" style={styles.link}>
-        <FaHome /> Dashboard
-      </Link>
-
-      <Link to="/dashboard" style={styles.link}>
-        <FaClipboardList /> Requests
-      </Link>
+    <div className="sidebar">
+      <h2>Menu</h2>
+      <ul>
+        <li>Dashboard</li>
+        <li>PDF Summarizer</li>
+        <li>AI Chat</li>
+        <li>Projects</li>
+        <li>Voice Doubt</li>
+        <li>Plagiarism</li>
+      </ul>
     </div>
   );
 };

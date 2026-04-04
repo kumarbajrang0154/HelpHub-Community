@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../services/firebase";
 
@@ -10,36 +10,35 @@ import AuthLayout from "../../layouts/AuthLayout";
 import GoogleButton from "../../components/ui/GoogleButton";
 
 const Login = () => {
+  const navigate = useNavigate();
 
-  // 🔥 Google Login Handler
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    // ✅ Token store
+    localStorage.setItem("token", "dummy_token_123");
+
+    alert("Login Successful 🚀");
+
+    // ✅ FIXED REDIRECT
+    navigate("/");
+  };
+
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      console.log("Google User:", user);
+      console.log(user);
 
-      // 👉 Backend call (future)
-      /*
-      await fetch("/api/auth/google", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: user.displayName,
-          email: user.email,
-          googleId: user.uid,
-          profilePic: user.photoURL,
-        }),
-      });
-      */
+      // ✅ Token store (important)
+      localStorage.setItem("token", user.uid);
 
-      alert("Login Successful 🚀");
-
-    } catch (error) {
-      console.error("Google Login Error:", error);
-      alert("Login Failed ❌");
+      // ✅ FIXED REDIRECT
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      alert("Google Login Failed");
     }
   };
 
@@ -49,12 +48,13 @@ const Login = () => {
         <h2 className="title">Welcome back</h2>
         <p className="subtitle">Enter your credentials</p>
 
-        <Input label="Email" type="email" />
-        <Input label="Password" type="password" />
+        <form onSubmit={handleLogin}>
+          <Input label="Email" type="email" required />
+          <Input label="Password" type="password" required />
 
-        <Button>Log in</Button>
+          <Button type="submit">Log in</Button>
+        </form>
 
-        {/* 🔥 Google Login Button */}
         <GoogleButton onClick={handleGoogleLogin} />
 
         <p className="link-text">

@@ -1,54 +1,28 @@
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import "../styles/navbar.css";
 
 const Navbar = () => {
-  const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("userInfo"));
-
-  const logout = () => {
-    localStorage.removeItem("userInfo");
-    navigate("/login");
+  const scrollTo = (id) => {
+    document.getElementById(id).scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   return (
-    <nav style={styles.nav}>
-      <h2 style={{ color: "#3b82f6" }}>CodeHelp Hub</h2>
+    <nav className="navbar">
+      <div className="logo" onClick={() => scrollTo("home")}>
+        AI Platform
+      </div>
 
-      <div style={styles.links}>
-        <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
-
-        {user && (
-          <button onClick={logout} style={styles.btn}>
-            Logout
-          </button>
-        )}
+      <div className="nav-links">
+        <button onClick={() => scrollTo("home")}>Home</button>
+        <button onClick={() => scrollTo("services")}>Services</button>
+        <button onClick={() => scrollTo("how")}>How</button>
+        <button onClick={() => scrollTo("team")}>Team</button>
+        <button onClick={() => scrollTo("contact")}>Contact</button>
       </div>
     </nav>
   );
-};
-
-const styles = {
-  nav: {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "15px 30px",
-    background: "#020617",
-    color: "#fff",
-  },
-  links: {
-    display: "flex",
-    gap: "15px",
-    alignItems: "center",
-  },
-  btn: {
-    background: "#ef4444",
-    color: "#fff",
-    border: "none",
-    padding: "6px 12px",
-    borderRadius: "6px",
-    cursor: "pointer",
-  },
 };
 
 export default Navbar;

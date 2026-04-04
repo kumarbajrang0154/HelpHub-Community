@@ -1,106 +1,69 @@
-import { motion } from "framer-motion";
+import React from "react";
+import Navbar from "../components/Navbar";
+import "../styles/home.css";
 
 const Home = () => {
   return (
-    <div style={styles.page}>
-      
-      {/* HERO SECTION */}
-      <motion.div
-        initial={{ opacity: 0, y: 60 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        style={styles.hero}
-      >
-        <h1 style={styles.title}>
-          CodeHelp Hub 🚀
-        </h1>
+    <div>
+      <Navbar />
 
-        <p style={styles.subtitle}>
-          Get help with Java, Web Dev & Projects instantly 💻
-        </p>
+      {/* HERO */}
+      <section id="home" className="section hero">
+        <h1>🚀 AI Student Platform</h1>
+        <p>Your AI-powered learning assistant</p>
+        <div className="hero-btns">
+          <button>Get Started</button>
+          <button>Login</button>
+        </div>
+      </section>
 
-        <button style={styles.btn}>
-          Get Started
-        </button>
-      </motion.div>
+      {/* SERVICES */}
+      <section id="services" className="section services">
+        <h2>Our Services</h2>
 
-      {/* FEATURES */}
-      <div style={styles.features}>
-        {features.map((item, i) => (
-          <motion.div
-            key={i}
-            whileHover={{ scale: 1.05 }}
-            style={styles.card}
-          >
-            <h3>{item.title}</h3>
-            <p>{item.desc}</p>
-          </motion.div>
-        ))}
-      </div>
+        <div className="card-container">
+          <div className="card">📄 AI PDF Summarizer</div>
+          <div className="card">🤖 AI Chatbot</div>
+          <div className="card">🎤 Voice Doubt Solver</div>
+          <div className="card">📚 Project Support</div>
+        </div>
+      </section>
 
+      {/* HOW IT WORKS */}
+      <section id="how" className="section how">
+        <h2>How It Works</h2>
+
+        <div className="steps">
+          <div className="step">1️⃣ Sign Up</div>
+          <div className="step">2️⃣ Upload / Ask</div>
+          <div className="step">3️⃣ Get AI Help</div>
+        </div>
+      </section>
+
+      {/* TEAM */}
+      <section id="team" className="section team">
+        <h2>Meet the Developers</h2>
+
+        <div className="card-container">
+          <div className="card">
+            👨‍💻 Bajrang Kumar <br /> Full Stack Developer
+          </div>
+
+          <div className="card">
+            👨‍💻 Team Member <br /> AI Engineer
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT */}
+      <section id="contact" className="section contact">
+        <h2>Contact Us</h2>
+
+        <p>Email: support@aistudent.com</p>
+        <p>Phone: +91 9876543210</p>
+      </section>
     </div>
   );
-};
-
-const features = [
-  {
-    title: "💻 Project Help",
-    desc: "Get help in Java, React & Full Stack Projects",
-  },
-  {
-    title: "🐞 Bug Fixing",
-    desc: "Fix errors quickly with expert support",
-  },
-  {
-    title: "📚 Assignment Help",
-    desc: "Complete your assignments faster",
-  },
-];
-
-const styles = {
-  page: {
-    minHeight: "100vh",
-    background: "linear-gradient(135deg, #0f172a, #1e293b)",
-    color: "#fff",
-    padding: "40px",
-  },
-  hero: {
-    textAlign: "center",
-    marginTop: "60px",
-  },
-  title: {
-    fontSize: "48px",
-    fontWeight: "bold",
-  },
-  subtitle: {
-    marginTop: "10px",
-    fontSize: "18px",
-    opacity: 0.8,
-  },
-  btn: {
-    marginTop: "20px",
-    padding: "12px 25px",
-    background: "#3b82f6",
-    border: "none",
-    borderRadius: "8px",
-    color: "#fff",
-    cursor: "pointer",
-  },
-  features: {
-    display: "flex",
-    justifyContent: "center",
-    gap: "20px",
-    marginTop: "80px",
-    flexWrap: "wrap",
-  },
-  card: {
-    background: "#1e293b",
-    padding: "20px",
-    borderRadius: "12px",
-    width: "250px",
-    textAlign: "center",
-    boxShadow: "0 10px 20px rgba(0,0,0,0.3)",
-  },
 };
 
 export default Home;
