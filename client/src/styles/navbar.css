@@ -2,23 +2,39 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background: #020617;
-  color: white;
+  padding: 15px 40px;
+
   display: flex;
   justify-content: space-between;
-  padding: 15px 30px;
+  align-items: center;
+
+  /* 🔥 GLASS NAVBAR */
+  background: rgba(2, 6, 23, 0.7);
+  backdrop-filter: blur(10px);
+
+  color: white;
   z-index: 1000;
 }
 
 .logo {
+  font-size: 20px;
   font-weight: bold;
   cursor: pointer;
 }
 
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
 .nav-links button {
-  margin-left: 15px;
   background: transparent;
   border: none;
-  color: white;
+  color: #cbd5f5;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-links button:hover {
+  color: #38bdf8;
 }

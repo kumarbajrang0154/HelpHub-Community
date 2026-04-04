@@ -1,24 +1,58 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import "../styles/home.css";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <Navbar />
 
-      {/* HERO */}
-      <section id="home" className="section hero">
-        <h1>🚀 AI Student Platform</h1>
-        <p>Your AI-powered learning assistant</p>
-        <div className="hero-btns">
-          <button>Get Started</button>
-          <button>Login</button>
+      {/* ================= HERO ================= */}
+      <section id="home" className="hero">
+        
+        {/* LEFT CONTENT */}
+        <div className="hero-left">
+          <h1>
+            Get where you're <br />
+            going faster with <span>AI Platform</span>
+          </h1>
+
+          <p>
+            Expand your skills in development, testing, analytics
+            and designing with AI-powered tools.
+          </p>
+
+          <div className="hero-buttons">
+            <button
+              className="primary-btn"
+              onClick={() => navigate("/register")}
+            >
+              Start Now
+            </button>
+
+            <button
+              className="secondary-btn"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </button>
+          </div>
+        </div>
+
+        {/* RIGHT IMAGE */}
+        <div className="hero-right">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png"
+            alt="AI Student"
+          />
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section id="services" className="section services">
+      {/* ================= SERVICES ================= */}
+      <section id="services" className="section">
         <h2>Our Services</h2>
 
         <div className="card-container">
@@ -29,39 +63,14 @@ const Home = () => {
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section id="how" className="section how">
-        <h2>How It Works</h2>
-
-        <div className="steps">
-          <div className="step">1️⃣ Sign Up</div>
-          <div className="step">2️⃣ Upload / Ask</div>
-          <div className="step">3️⃣ Get AI Help</div>
-        </div>
-      </section>
-
-      {/* TEAM */}
-      <section id="team" className="section team">
-        <h2>Meet the Developers</h2>
-
-        <div className="card-container">
-          <div className="card">
-            👨‍💻 Bajrang Kumar <br /> Full Stack Developer
-          </div>
-
-          <div className="card">
-            👨‍💻 Team Member <br /> AI Engineer
-          </div>
-        </div>
-      </section>
-
-      {/* CONTACT */}
-      <section id="contact" className="section contact">
+      {/* ================= CONTACT ================= */}
+      <section id="contact" className="section">
         <h2>Contact Us</h2>
 
         <p>Email: support@aistudent.com</p>
         <p>Phone: +91 9876543210</p>
       </section>
+
     </div>
   );
 };
