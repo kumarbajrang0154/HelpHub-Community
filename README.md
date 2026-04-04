@@ -1,7 +1,6 @@
 <<<<<<< HEAD
 # HelpHub-Community
 =======
-# CodeHelp Hub - Student Help Platform
 
 A modern, full-stack web application where students can request help for Java projects, bug fixing, website development, and assignments.
 
