@@ -148,3 +148,154 @@ body {
   opacity: 1;
   box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
 }
+/* ================= HERO ================= */
+
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 100px;
+
+  /* 🔥 DARK FUTURISTIC BACKGROUND */
+  background: radial-gradient(circle at top left, #1e293b, #020617 70%);
+  color: white;
+}
+
+/* LEFT */
+.hero-left {
+  max-width: 50%;
+}
+
+.hero-left h1 {
+  font-size: 48px;
+}
+
+.hero-left span {
+  color: #6366f1;
+}
+
+.hero-left p {
+  margin-top: 10px;
+  color: #555;
+}
+
+/* BUTTONS */
+.primary-btn {
+  background: #6366f1;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.secondary-btn {
+  padding: 12px 25px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+/* RIGHT */
+.hero-right {
+  position: relative;
+}
+
+.hero-img {
+  width: 320px;
+}
+
+/* FLOATING CARDS */
+.floating-card {
+  position: absolute;
+  padding: 10px 20px;
+  background: white;
+  border-radius: 10px;
+  font-size: 14px;
+
+  /* 🔥 TEXT FIX */
+  color: #020617;  /* dark text */
+
+  font-weight: 500;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+
+  animation: float 4s ease-in-out infinite;
+}
+
+.card1 {
+  top: -20px;
+  left: -40px;
+}
+
+.card2 {
+  bottom: 20px;
+  right: -30px;
+}
+
+.card3 {
+  top: 50%;
+  right: -60px;
+}
+
+/* FLOAT ANIMATION */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+/* ================= SERVICES ================= */
+
+.services {
+  padding: 100px;
+  background: #020617;
+  color: white;
+  text-align: center;
+}
+
+.service-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+/* PREMIUM CARDS */
+.service-card {
+  padding: 25px;
+  width: 230px;
+
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255,255,255,0.1);
+
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+/* HOVER */
+.service-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 25px rgba(99,102,241,0.5);
+}
+
+/* CLICK */
+.service-card:active {
+  transform: scale(0.95);
+}
+
+/* ================= CONTACT ================= */
+
+.contact {
+  padding: 80px;
+  background: #020617;
+  color: white;
+  text-align: center;
+}
