@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { registerUser } from "../services/authService";
+import { registerUser } from "../../services/authService";
 import toast from "react-hot-toast";
 
 const Register = () => {
