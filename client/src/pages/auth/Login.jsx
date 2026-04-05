@@ -27,7 +27,7 @@ const Login = () => {
       const result = await loginApi(formData.email, formData.password);
       console.log("Login successful:", result);
       login(result, result.token);
-      navigate("/dashboard");
+      navigate("/services");
     } catch (err) {
       console.error("Login error:", err);
       setError(err.message || "Login failed. Please check your credentials.");
@@ -36,17 +36,23 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = async () => {
-    setLoading(true);
-    setError("");
+  const handleGoogleLogin = (e) => {
+    // Prevent form submission
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
+    
+    console.log('Google login initiated...');
+    
+    // Redirect to backend OAuth route
+    const backendUrl = "http://localhost:5000/api/auth/google";
+    console.log('Redirecting to:', backendUrl);
+    
     try {
-      // TODO: Implement Google login with backend OAuth
-      alert("Google login integration coming soon.");
+      window.location.href = backendUrl;
     } catch (error) {
-      console.error("Google login error:", error);
-      setError("Google login failed.");
-    } finally {
-      setLoading(false);
+      console.error('Google login redirect error:', error);
+      setError('Failed to start Google login. Please try again.');
     }
   };
 

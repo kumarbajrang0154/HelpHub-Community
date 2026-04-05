@@ -27,7 +27,7 @@ const Signup = () => {
       const result = await registerApi(formData.name, formData.email, formData.password);
       console.log("Signup successful:", result);
       login(result, result.token);
-      navigate("/dashboard");
+      navigate("/services");
     } catch (err) {
       console.error("Signup error:", err);
       setError(err.message || "Signup failed. Please try again.");
@@ -36,17 +36,23 @@ const Signup = () => {
     }
   };
 
-  const handleGoogleSignup = async () => {
-    setLoading(true);
-    setError("");
+  const handleGoogleSignup = (e) => {
+    // Prevent form submission
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
+    
+    console.log('Google signup initiated...');
+    
+    // Redirect to backend OAuth route
+    const backendUrl = "http://localhost:5000/api/auth/google";
+    console.log('Redirecting to:', backendUrl);
+    
     try {
-      // TODO: Implement Google signup with backend OAuth
-      alert("Google signup integration coming soon.");
+      window.location.href = backendUrl;
     } catch (error) {
-      console.error("Google signup error:", error);
-      setError("Google signup failed.");
-    } finally {
-      setLoading(false);
+      console.error('Google signup redirect error:', error);
+      setError('Failed to start Google signup. Please try again.');
     }
   };
 

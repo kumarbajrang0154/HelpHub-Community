@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Services from "./pages/Services";
+import Dashboard from "./pages/dashboard/Dashboard";
 import Tool from "./pages/Tool";
 import ChatFullScreen from "./pages/ChatFullScreen";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -24,6 +25,14 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Services />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
               </ProtectedRoute>
             }
           />

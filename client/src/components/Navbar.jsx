@@ -15,7 +15,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { isAuthenticated, logout } = useContext(AuthContext);
+  const { isAuthenticated, user, logout } = useContext(AuthContext);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -28,6 +28,10 @@ const Navbar = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const profileAvatar = user?.name
+    ? `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=0f172a&color=38bdf8&rounded=true&size=64`
+    : "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=40&q=80";
+
   return (
     <motion.nav
       className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}
@@ -35,7 +39,7 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <button className="brand" onClick={() => window.location.reload()}>!Edvance Platform</button>
+      <Link className="brand" to="/">Edvance Platform</Link>
 
       <div className="nav-center">
         {navItems.map((item) => (
@@ -62,13 +66,15 @@ const Navbar = () => {
           <div className="avatar-container">
             <img
               className="avatar"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=40&q=80"
+              src={profileAvatar}
               alt="Profile"
               onClick={() => setDropdownOpen(!dropdownOpen)}
             />
             {dropdownOpen && (
               <div className="dropdown-menu">
-                <button className="dropdown-item">Profile</button>
+                <Link to="/profile" className="dropdown-item" onClick={() => setDropdownOpen(false)}>
+                  Profile
+                </Link>
                 <button className="dropdown-item" onClick={logout}>Logout</button>
               </div>
             )}

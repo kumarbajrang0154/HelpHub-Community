@@ -16,7 +16,14 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
+      required: function() {
+        return !this.googleId; // Password required only if not Google user
+      },
+    },
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true, // Allows null values but unique when present
     },
     role: {
       type: String,
@@ -27,9 +34,9 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// 🔐 Hash password before save
+// 🔐 Hash password before save (only if password exists)
 userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
+  if (!this.isModified('password') || !this.password) return next();
 
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
@@ -38,6 +45,7 @@ userSchema.pre('save', async function (next) {
 
 // 🔑 Compare password
 userSchema.methods.matchPassword = async function (enteredPassword) {
+  if (!this.password) return false; // No password for Google users
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
