@@ -1,0 +1,86 @@
+/* ============================================
+   GLOBAL BACK BUTTON - BOTTOM LEFT
+   ============================================ */
+
+.global-back-button {
+  position: fixed;
+  bottom: 32px;
+  left: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  border: 2px solid rgba(139, 92, 246, 0.5);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 35px rgba(139, 92, 246, 0.3);
+  z-index: 997;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.global-back-button:hover {
+  transform: scale(1.15) translateX(-8px);
+  box-shadow: 0 15px 45px rgba(139, 92, 246, 0.5);
+  border-color: rgba(139, 92, 246, 0.8);
+  background: linear-gradient(135deg, #a78bfa, #7c3aed);
+}
+
+.global-back-button:active {
+  transform: scale(0.95);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .global-back-button {
+    bottom: 24px;
+    left: 16px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .global-back-button:hover {
+    transform: scale(1.08) translateX(-4px);
+  }
+}
+
+@media (max-width: 480px) {
+  .global-back-button {
+    bottom: 16px;
+    left: 12px;
+    width: 48px;
+    height: 48px;
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+  }
+
+  .global-back-button:hover {
+    transform: scale(1.05) translateX(-2px);
+  }
+}
+
+/* Accessibility - Focus state */
+.global-back-button:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.6);
+  outline-offset: 4px;
+}
+
+/* Animation - Floating pulse on initial load */
+@keyframes floatPulse {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.global-back-button {
+  animation: floatPulse 3s ease-in-out infinite;
+}
+
+.global-back-button:hover {
+  animation: none;
+}
