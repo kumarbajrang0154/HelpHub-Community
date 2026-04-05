@@ -67,7 +67,7 @@ const Login = () => {
           />
           <div className="image-overlay">
             <h2>Welcome Back</h2>
-            <p>Continue your learning journey with AI Platform</p>
+            <p>Continue your learning journey with Edvance Platform</p>
           </div>
         </motion.div>
 

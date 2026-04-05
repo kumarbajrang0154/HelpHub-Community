@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="footer-shell">
       <div className="footer-grid">
         <div className="footer-column footer-brand">
-          <h3>AI Platform</h3>
+          <h3>Edvance Platform</h3>
           <p className="footer-tagline">
             AI-powered student workspace for faster learning and smarter growth.
           </p>
@@ -50,7 +50,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <span>© 2026 AI Platform</span>
+        <span>© 2026 Edvance Platform</span>
         <span>Designed for modern student growth</span>
       </div>
     </footer>
