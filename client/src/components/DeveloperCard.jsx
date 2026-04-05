@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
-import { FiFacebook, FiInstagram, FiLinkedin } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiInstagram, FiFacebook } from "react-icons/fi";
 
 const iconMap = {
   linkedin: FiLinkedin,
-  facebook: FiFacebook,
+  github: FiGithub,
   instagram: FiInstagram,
+  facebook: FiFacebook,
 };
 
-const DeveloperCard = ({ image, name, role, email, socials }) => {
+const DeveloperCard = ({ image, name, intro, email, social }) => {
   return (
     <motion.article
       className="developer-card glass-card"
@@ -18,15 +19,15 @@ const DeveloperCard = ({ image, name, role, email, socials }) => {
       <img className="avatar" src={image} alt={name} />
       <div className="developer-copy">
         <h3>{name}</h3>
-        <p>{role}</p>
+        <p className="intro">{intro}</p>
         <a className="developer-email" href={`mailto:${email}`}>{email}</a>
       </div>
 
       <div className="social-row">
-        {socials.map((item) => {
-          const Icon = iconMap[item.type];
+        {social && Object.entries(social).map(([platform, url]) => {
+          const Icon = iconMap[platform.toLowerCase()] || FiGithub;
           return (
-            <a key={item.type} href={item.url} target="_blank" rel="noreferrer" className="social-link">
+            <a key={platform} href={url} target="_blank" rel="noreferrer" className="social-link">
               <Icon size={18} />
             </a>
           );

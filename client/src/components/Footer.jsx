@@ -1,10 +1,10 @@
-import { FiFacebook, FiInstagram, FiLinkedin } from "react-icons/fi";
+import { FiLinkedin, FiFacebook, FiInstagram } from "react-icons/fi";
 
 const Footer = () => {
   return (
     <div className="footer-content glass-card">
       <div className="footer-brand">
-        <h3>NovaMind</h3>
+        <h3>AI Platform</h3>
         <p>Premium AI student workspace for learning faster, staying organized, and mastering every course.</p>
       </div>
 
@@ -12,6 +12,8 @@ const Footer = () => {
         <span className="footer-heading">Quick links</span>
         <a href="#hero">Home</a>
         <a href="#services">Services</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#developers">Developers</a>
         <a href="#contact">Contact</a>
       </div>
 
@@ -30,7 +32,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <p className="footer-copy">© 2026 NovaMind. All rights reserved. Designed for modern student growth.</p>
+      <p className="footer-copy">© 2026 AI Platform. All rights reserved. Designed for modern student growth.</p>
     </div>
   );
 };
