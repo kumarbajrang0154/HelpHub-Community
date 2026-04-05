@@ -6,7 +6,10 @@ import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import Services from "./pages/Services";
 import Tool from "./pages/Tool";
+import ChatFullScreen from "./pages/ChatFullScreen";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Chatbot from "./components/Chatbot";
+import GlobalBackButton from "./components/GlobalBackButton";
 
 const App = () => {
   return (
@@ -32,7 +35,10 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          <Route path="/chat" element={<ChatFullScreen />} />
         </Routes>
+        <Chatbot />
+        <GlobalBackButton />
       </Router>
     </AuthProvider>
   );

@@ -121,7 +121,7 @@ const Home = () => {
               transition={{ duration: 0.8 }}
             >
               <h1 className="hero-title">
-                Get where you're going faster with <span className="gradient-text">AI Platform</span>
+                Get where you're going faster with <span className="gradient-text">Edvance Platform</span>
               </h1>
               <p className="hero-subtitle">
                 Revolutionize your learning experience with our cutting-edge AI tools designed specifically for students.
@@ -216,7 +216,7 @@ const Home = () => {
               viewport={{ once: true }}
             >
               <h2>Developers</h2>
-              <p>Meet the team behind AI Platform.</p>
+              <p>Meet the team behind Edvance Platform.</p>
             </motion.div>
           </div>
           <div className="section-right">

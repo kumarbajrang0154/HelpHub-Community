@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { AuthContext } from "../context/AuthContext";
 
 const navItems = [
-  { label: "Home", route: "/" },
+  { label: "Home", target: "hero" },
   { label: "Services", route: "/services" },
   { label: "Workflow", target: "workflow" },
   { label: "Developers", target: "developers" },
@@ -35,7 +35,7 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <button className="brand" onClick={() => scrollTo("hero")}>AI Platform</button>
+      <button className="brand" onClick={() => window.location.reload()}>!Edvance Platform</button>
 
       <div className="nav-center">
         {navItems.map((item) => (

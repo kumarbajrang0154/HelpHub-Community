@@ -55,7 +55,23 @@ const Contact = () => {
                     <Icon className="contact-icon" />
                     <h4>{item.title}</h4>
                   </div>
-                  <p className="contact-item-detail">{item.detail}</p>
+                  <p className="contact-item-detail">
+                    {item.title === "Email" ? (
+                      <a href={`mailto:${item.detail}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                        {item.detail}
+                      </a>
+                    ) : item.title === "Phone" ? (
+                      <a href={`tel:${item.detail}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+                        {item.detail}
+                      </a>
+                    ) : item.title === "Address" ? (
+                      <a href={`https://maps.google.com/?q=${encodeURIComponent(item.detail)}`} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
+                        {item.detail}
+                      </a>
+                    ) : (
+                      item.detail
+                    )}
+                  </p>
                 </div>
               );
             })}

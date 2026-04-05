@@ -81,7 +81,7 @@ const Register = () => {
     <AuthLayout>
       <Card>
         <h2 className="title">Create Account</h2>
-        <p className="subtitle">Start your journey</p>
+        <p className="subtitle">Start your journey with Edvance Platform</p>
 
         <form onSubmit={handleSignup}>
           <Input label="Full Name" required />
