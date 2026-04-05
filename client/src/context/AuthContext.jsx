@@ -10,9 +10,17 @@ export const AuthProvider = ({ children }) => {
   // Check if user is logged in on mount
   useEffect(() => {
     const token = localStorage.getItem('authToken');
-    if (token) {
-      // Verify token validity here
-      setIsAuthenticated(true);
+    const storedUser = localStorage.getItem('user');
+    
+    if (token && storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+        setIsAuthenticated(true);
+      } catch (err) {
+        console.error('Error parsing stored user:', err);
+        localStorage.removeItem('user');
+        localStorage.removeItem('authToken');
+      }
     }
     setLoading(false);
   }, []);
@@ -21,12 +29,14 @@ export const AuthProvider = ({ children }) => {
     setUser(userData);
     setIsAuthenticated(true);
     localStorage.setItem('authToken', token);
+    localStorage.setItem('user', JSON.stringify(userData));
   }, []);
 
   const logout = useCallback(() => {
     setUser(null);
     setIsAuthenticated(false);
     localStorage.removeItem('authToken');
+    localStorage.removeItem('user');
   }, []);
 
   const value = {

@@ -1,7 +1,7 @@
-import Request from "../models/Request.js";
+const Request = require("../models/Request");
 
 // ✅ CREATE REQUEST
-export const createRequest = async (req, res) => {
+const createRequest = async (req, res) => {
   try {
     const { title, description } = req.body;
 
@@ -25,7 +25,7 @@ export const createRequest = async (req, res) => {
 };
 
 // ✅ GET USER REQUESTS (👉 YEHI TERA QUESTION THA)
-export const getUserRequests = async (req, res) => {
+const getUserRequests = async (req, res) => {
   try {
     const requests = await Request.find({ user: req.user.id });
 
@@ -38,3 +38,5 @@ export const getUserRequests = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+module.exports = { createRequest, getUserRequests };

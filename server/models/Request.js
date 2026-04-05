@@ -1,6 +1,6 @@
 // models/Request.js
 
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const requestSchema = new mongoose.Schema({
   user: {
@@ -17,4 +17,4 @@ const requestSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-export default mongoose.model("Request", requestSchema);
+module.exports = mongoose.model("Request", requestSchema);

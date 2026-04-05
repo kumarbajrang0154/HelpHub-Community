@@ -1,7 +1,35 @@
 {
   "dependencies": {
     "@react-oauth/google": "^0.13.4",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.0",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "firebase": "^12.11.0",
-    "jwt-decode": "^4.0.0"
-  }
+    "jsonwebtoken": "^9.0.3",
+    "jwt-decode": "^4.0.0",
+    "mongoose": "^9.4.1",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "name": "helphub-community",
+  "version": "1.0.0",
+  "description": "<<<<<<< HEAD\r # HelpHub-Community\r =======",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kumarbajrang0154/HelpHub-Community.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kumarbajrang0154/HelpHub-Community/issues"
+  },
+  "homepage": "https://github.com/kumarbajrang0154/HelpHub-Community#readme"
 }

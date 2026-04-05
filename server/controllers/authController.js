@@ -53,3 +53,24 @@ exports.loginUser = async (req, res, next) => {
     next(error);
   }
 };
+
+// @desc Get User Profile
+// @route GET /api/auth/profile
+// @access Private (requires JWT token)
+exports.getUserProfile = async (req, res, next) => {
+  try {
+    const user = req.user;
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

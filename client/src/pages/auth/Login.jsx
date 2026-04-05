@@ -1,35 +1,36 @@
 ﻿import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "../../services/firebase";
 import { AuthContext } from "../../context/AuthContext";
 import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
+import { login as loginApi } from "../../services/authApi";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
     try {
-      const result = await signInWithEmailAndPassword(auth, formData.email, formData.password);
-      const token = result.user.accessToken;
-      localStorage.setItem("authToken", token);
-      login(result.user, token);
-      navigate("/services");
-    } catch (error) {
-      console.error("Login error:", error);
-      alert("Login failed. Please check your credentials.");
+      const result = await loginApi(formData.email, formData.password);
+      console.log("Login successful:", result);
+      login(result, result.token);
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("Login error:", err);
+      setError(err.message || "Login failed. Please check your credentials.");
     } finally {
       setLoading(false);
     }
@@ -37,16 +38,13 @@ const Login = () => {
 
   const handleGoogleLogin = async () => {
     setLoading(true);
+    setError("");
     try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      const token = result.user.accessToken;
-      localStorage.setItem("authToken", token);
-      login(result.user, token);
-      navigate("/services");
+      // TODO: Implement Google login with backend OAuth
+      alert("Google login integration coming soon.");
     } catch (error) {
       console.error("Google login error:", error);
-      alert("Google login failed.");
+      setError("Google login failed.");
     } finally {
       setLoading(false);
     }
@@ -81,6 +79,19 @@ const Login = () => {
             <h1>Sign In</h1>
             <p>Access your AI-powered learning workspace</p>
           </div>
+
+          {error && (
+            <div className="error-message" style={{ 
+              backgroundColor: "#fee", 
+              color: "#c33", 
+              padding: "12px", 
+              borderRadius: "4px", 
+              marginBottom: "16px",
+              fontSize: "14px"
+            }}>
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="form-content">
             <div className="form-group">
