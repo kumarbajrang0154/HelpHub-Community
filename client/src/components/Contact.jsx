@@ -59,21 +59,6 @@ const Contact = () => {
                 </div>
               );
             })}
-
-            <div className="social-links footer-social-block">
-              <h4>Follow Us</h4>
-              <div className="footer-social-row">
-                <a href="#" className="social-link" aria-label="LinkedIn">
-                  <FiLinkedin size={20} />
-                </a>
-                <a href="#" className="social-link" aria-label="Instagram">
-                  <FiInstagram size={20} />
-                </a>
-                <a href="#" className="social-link" aria-label="Facebook">
-                  <FiFacebook size={20} />
-                </a>
-              </div>
-            </div>
           </motion.div>
         </div>
 
