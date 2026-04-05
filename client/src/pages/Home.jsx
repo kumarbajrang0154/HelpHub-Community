@@ -1,5 +1,6 @@
 ﻿import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ServiceCard from "../components/ServiceCard";
@@ -9,6 +10,8 @@ import Contact from "../components/Contact";
 import { FiArrowRight, FiPlay, FiUsers, FiBookOpen, FiTrendingUp, FiAward, FiCheckCircle } from "react-icons/fi";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const services = [
     {
       icon: FiBookOpen,
@@ -124,7 +127,7 @@ const Home = () => {
                 Revolutionize your learning experience with our cutting-edge AI tools designed specifically for students.
               </p>
               <div className="hero-actions">
-                <button className="primary-btn" onClick={() => scrollToSection('services')}>
+                <button className="primary-btn" onClick={() => navigate('/services')}>
                   Start Now <FiArrowRight size={20} />
                 </button>
                 <button className="ghost-btn" onClick={() => scrollToSection('contact')}>

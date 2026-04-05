@@ -1,83 +1,88 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Code, Bug, Globe, BookOpen } from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import ServiceCard from "../components/ServiceCard";
+import BackButton from "../components/BackButton";
+
+const services = [
+  {
+    name: "AI PDF Summarizer",
+    description: "Summarize long PDFs instantly",
+    price: "Free",
+    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=700&q=80",
+    slug: "ai-pdf-summarizer",
+  },
+  {
+    name: "AI Chatbot",
+    description: "Ask anything and get AI answers",
+    price: "Free",
+    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=700&q=80",
+    slug: "ai-chatbot",
+  },
+  {
+    name: "Voice Doubt Solver",
+    description: "Solve doubts using voice input",
+    price: "₹49",
+    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=700&q=80",
+    slug: "voice-doubt-solver",
+  },
+  {
+    name: "Project Support AI",
+    description: "Get help with coding projects",
+    price: "₹99",
+    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=700&q=80",
+    slug: "project-support-ai",
+  },
+];
 
 const Services = () => {
-  const services = [
-    {
-      icon: Code,
-      title: 'Java Project Help',
-      description: 'Expert assistance with Java assignments, projects, and complex applications. OOP, data structures, algorithms, and more.',
-      features: ['Code Review', 'Debugging', 'Architecture Design']
-    },
-    {
-      icon: Bug,
-      title: 'Bug Fixing',
-      description: 'Identify and fix bugs in your code. Quick turnaround on debugging complex issues across multiple languages.',
-      features: ['Quick Fixes', 'Root Cause Analysis', 'Performance Optimization']
-    },
-    {
-      icon: Globe,
-      title: 'Website Development',
-      description: 'Help with web development projects using HTML, CSS, JavaScript, React, and backend technologies.',
-      features: ['Frontend Development', 'Backend Support', 'Full Stack Projects']
-    },
-    {
-      icon: BookOpen,
-      title: 'Assignments & Learning',
-      description: 'Get guidance on assignments, understand concepts, and improve your coding skills with expert mentorship.',
-      features: ['Concept Explanation', 'Code Optimization', 'Best Practices']
-    }
-  ];
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 350);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <div>
-      {/* Header */}
-      <section className="pt-16 pb-12 bg-gradient-to-r from-blue-50 to-indigo-50">
-        <div className="container-max">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h1>
-          <p className="text-lg text-gray-600">
-            Comprehensive solutions for all your academic and coding needs
-          </p>
-        </div>
-      </section>
+    <section className="services-page-shell">
+      <div className="page-inner">
+        <BackButton />
 
-      {/* Services Grid */}
-      <section className="py-20">
-        <div className="container-max">
-          <div className="grid md:grid-cols-2 gap-8">
-            {services.map((service, index) => (
-              <div key={index} className="card">
-                <service.icon size={40} className="text-blue-600 mb-4" />
-                <h3 className="text-2xl font-bold mb-2 text-gray-900">{service.title}</h3>
-                <p className="text-gray-600 mb-4">{service.description}</p>
-                <ul className="mb-6 space-y-2">
-                  {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-gray-700">
-                      <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <Link to="/contact" className="btn-primary">
-                  Request Service
-                </Link>
-              </div>
+        <motion.div
+          className="services-header"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55 }}
+        >
+          <span className="eyebrow">Our Services</span>
+          <h1>AI services built for student success.</h1>
+          <p>
+            Explore premium AI tools designed to streamline learning, clarify doubts, and deliver fast project support.
+          </p>
+        </motion.div>
+
+        {isLoading ? (
+          <div className="services-loading">
+            <div className="loader" />
+            <p>Loading available services...</p>
+          </div>
+        ) : (
+          <div className="services-grid">
+            {services.map((service) => (
+              <ServiceCard
+                key={service.slug}
+                title={service.name}
+                description={service.description}
+                price={service.price}
+                image={service.image}
+                onProceed={() => navigate(`/tool/${service.slug}`)}
+              />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Pricing Note */}
-      <section className="py-16 bg-gray-50">
-        <div className="container-max text-center">
-          <h2 className="text-3xl font-bold mb-4">Flexible Pricing</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Each project is unique. Contact us with your requirements and we'll provide a customized quote.
-          </p>
-        </div>
-      </section>
-    </div>
+        )}
+      </div>
+    </section>
   );
 };
 

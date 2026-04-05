@@ -1,12 +1,11 @@
-﻿import { useEffect, useState } from "react";
+﻿import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 const navItems = [
-  { label: "Home", target: "hero" },
-  { label: "Services", target: "services" },
+  { label: "Home", route: "/" },
+  { label: "Services", route: "/services" },
   { label: "Workflow", target: "workflow" },
   { label: "Developers", target: "developers" },
   { label: "Contact", target: "contact" },
@@ -40,9 +39,15 @@ const Navbar = () => {
 
       <div className="nav-center">
         {navItems.map((item) => (
-          <button key={item.target} className="nav-link" onClick={() => scrollTo(item.target)}>
-            {item.label}
-          </button>
+          item.route ? (
+            <Link key={item.label} to={item.route} className="nav-link">
+              {item.label}
+            </Link>
+          ) : (
+            <button key={item.target} className="nav-link" onClick={() => scrollTo(item.target)}>
+              {item.label}
+            </button>
+          )
         ))}
       </div>
 
@@ -79,9 +84,22 @@ const Navbar = () => {
       {mobileMenuOpen && (
         <div className="mobile-menu">
           {navItems.map((item) => (
-            <button key={item.target} className="mobile-nav-link" onClick={() => { scrollTo(item.target); setMobileMenuOpen(false); }}>
-              {item.label}
-            </button>
+            item.route ? (
+              <Link key={item.label} to={item.route} className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>
+                {item.label}
+              </Link>
+            ) : (
+              <button
+                key={item.target}
+                className="mobile-nav-link"
+                onClick={() => {
+                  scrollTo(item.target);
+                  setMobileMenuOpen(false);
+                }}
+              >
+                {item.label}
+              </button>
+            )
           ))}
           {!isAuthenticated && (
             <>

@@ -1,8 +1,9 @@
-﻿import { useState } from "react";
+﻿import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../../services/firebase";
+import { AuthContext } from "../../context/AuthContext";
 import { FiMail, FiLock, FiUser, FiPhone, FiEye, FiEyeOff } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
 
@@ -11,6 +12,7 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,8 +23,10 @@ const Signup = () => {
     setLoading(true);
     try {
       const result = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-      localStorage.setItem("authToken", result.user.accessToken);
-      navigate("/");
+      const token = result.user.accessToken;
+      localStorage.setItem("authToken", token);
+      login(result.user, token);
+      navigate("/services");
     } catch (error) {
       console.error("Signup error:", error);
       alert("Signup failed. Please try again.");
@@ -36,8 +40,10 @@ const Signup = () => {
     try {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
-      localStorage.setItem("authToken", result.user.accessToken);
-      navigate("/");
+      const token = result.user.accessToken;
+      localStorage.setItem("authToken", token);
+      login(result.user, token);
+      navigate("/services");
     } catch (error) {
       console.error("Google signup error:", error);
       alert("Google signup failed.");
