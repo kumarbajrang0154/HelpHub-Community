@@ -1,0 +1,40 @@
+/* ============================================
+   SCROLL PROGRESS INDICATOR
+   ============================================ */
+
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--glass-bg);
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), #ec4899);
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease infinite;
+  border-radius: 0 3px 3px 0;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+
+/* Hide on mobile for cleaner look */
+@media (max-width: 768px) {
+  .scroll-progress-container {
+    display: none;
+  }
+}

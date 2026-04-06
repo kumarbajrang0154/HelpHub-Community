@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AuthContext } from "../context/AuthContext";
+import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
   { label: "Home", target: "hero" },
@@ -62,6 +63,7 @@ const Navbar = () => {
       </button>
 
       <div className="nav-actions">
+        <ThemeToggle />
         {isAuthenticated ? (
           <div className="avatar-container">
             <img

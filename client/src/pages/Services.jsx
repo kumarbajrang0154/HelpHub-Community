@@ -1,8 +1,18 @@
+<<<<<<< HEAD
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { FiSearch, FiMessageCircle, FiFileText, FiMic, FiTool, FiCompass, FiArrowRight } from "react-icons/fi";
 import { AuthContext } from "../context/AuthContext";
 import { getProfile } from "../services/authApi";
+=======
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import ServiceCard from "../components/ServiceCard";
+import { LoadingSpinner, LoadingSkeleton } from "../components/Loading";
+import { useScrollAnimation } from "../hooks/useAnimations";
+import { useToast } from "../components/Toast";
+>>>>>>> 749c864 (AI Chatbot and Universal Back button added by Bajrang Kumar)
 
 const services = [
   {
@@ -45,6 +55,7 @@ const navItems = [
 
 const Services = () => {
   const [isLoading, setIsLoading] = useState(true);
+<<<<<<< HEAD
   const { user, login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -87,10 +98,52 @@ const Services = () => {
 
 
     const timer = setTimeout(() => setIsLoading(false), 260);
+=======
+  const [servicesRef, isServicesVisible] = useScrollAnimation(0.1);
+  const navigate = useNavigate();
+  const { success } = useToast();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 800);
+>>>>>>> 749c864 (AI Chatbot and Universal Back button added by Bajrang Kumar)
     return () => clearTimeout(timer);
   }, [searchParams, navigate, login]);
 
+  const handleServiceClick = (service) => {
+    success(`Launching ${service.name}...`);
+    setTimeout(() => {
+      navigate(`/tool/${service.slug}`);
+    }, 500);
+  };
+
+  if (isLoading) {
+    return (
+      <section className="services-page-shell">
+        <div className="page-inner">
+          <div className="services-header">
+            <LoadingSkeleton width="120px" height="24px" />
+            <LoadingSkeleton width="300px" height="48px" />
+            <LoadingSkeleton width="500px" height="20px" />
+          </div>
+          <div className="services-grid">
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className="service-card-skeleton">
+                <LoadingSkeleton width="100%" height="200px" borderRadius="12px" />
+                <div style={{ padding: "16px" }}>
+                  <LoadingSkeleton width="80%" height="24px" />
+                  <LoadingSkeleton width="100%" height="16px" />
+                  <LoadingSkeleton width="60px" height="32px" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
+<<<<<<< HEAD
     <div className="dashboard-page">
       <aside className="dashboard-sidebar">
         <div className="sidebar-brand">
@@ -178,6 +231,50 @@ const Services = () => {
         )}
       </main>
     </div>
+=======
+    <section className="services-page-shell">
+      <div className="page-inner">
+        <motion.div
+          className="services-header"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55 }}
+        >
+          <span className="eyebrow">Our Services</span>
+          <h1>AI services built for student success.</h1>
+          <p>
+            Explore premium AI tools designed to streamline learning, clarify doubts, and deliver fast project support.
+          </p>
+        </motion.div>
+
+        <motion.div
+          ref={servicesRef}
+          className="services-grid"
+          initial={{ opacity: 0, y: 40 }}
+          animate={isServicesVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {services.map((service, index) => (
+            <motion.div
+              key={service.slug}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isServicesVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <ServiceCard
+                icon={null}
+                image={service.image}
+                title={service.name}
+                description={service.description}
+                price={service.price}
+                onProceed={() => handleServiceClick(service)}
+              />
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+>>>>>>> 749c864 (AI Chatbot and Universal Back button added by Bajrang Kumar)
   );
 };
 

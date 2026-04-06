@@ -1,0 +1,132 @@
+/* ============================================
+   LOADING COMPONENTS
+   ============================================ */
+
+/* Loading Spinner */
+.loading-spinner {
+  position: relative;
+  display: inline-block;
+}
+
+.loading-spinner .spinner-ring {
+  position: absolute;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-spinner .spinner-ring:nth-child(1) {
+  width: 100%;
+  height: 100%;
+  animation-delay: -0.33s;
+}
+
+.loading-spinner .spinner-ring:nth-child(2) {
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  animation-delay: -0.66s;
+}
+
+.loading-spinner .spinner-ring:nth-child(3) {
+  width: 60%;
+  height: 60%;
+  top: 20%;
+  left: 20%;
+  animation-delay: -1s;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Color Variants */
+.loading-spinner-primary {
+  color: #3b82f6;
+}
+
+.loading-spinner-white {
+  color: white;
+}
+
+/* Loading Dots */
+.loading-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.loading-dot {
+  background: currentColor;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+/* Loading Skeleton */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Page Loader */
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.loader-content p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Dark mode adjustments */
+.theme-wrapper.dark .loading-skeleton {
+  background: linear-gradient(90deg, rgba(148, 163, 184, 0.1) 25%, rgba(148, 163, 184, 0.2) 50%, rgba(148, 163, 184, 0.1) 75%);
+}
+
+.theme-wrapper.light .loading-skeleton {
+  background: linear-gradient(90deg, rgba(226, 232, 240, 0.4) 25%, rgba(226, 232, 240, 0.6) 50%, rgba(226, 232, 240, 0.4) 75%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-loader .loader-content {
+    gap: 20px;
+  }
+
+  .page-loader .loader-content p {
+    font-size: 14px;
+  }
+}
