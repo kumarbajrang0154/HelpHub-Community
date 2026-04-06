@@ -3,8 +3,8 @@
    ============================================ */
 
 .theme-toggle {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);

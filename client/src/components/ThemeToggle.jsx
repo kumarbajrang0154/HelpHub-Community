@@ -28,9 +28,9 @@ const ThemeToggle = () => {
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
         {isDark ? (
-          <FiSun size={20} />
+          <FiSun size={18} />
         ) : (
-          <FiMoon size={20} />
+          <FiMoon size={18} />
         )}
       </motion.div>
     </motion.button>

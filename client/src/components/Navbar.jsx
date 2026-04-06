@@ -48,8 +48,8 @@ const Navbar = () => {
   };
 
   const profileAvatar = user?.name
-    ? `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=0f172a&color=38bdf8&rounded=true&size=44`
-    : "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=44&q=80";
+    ? `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=0f172a&color=38bdf8&rounded=true&size=40`
+    : "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=40&q=80";
 
   return (
     <motion.nav
@@ -58,7 +58,7 @@ const Navbar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <Link className="brand" to="/">!Edvance Platform</Link>
+      <Link className="brand" to="/" style={{ textDecoration: 'none' }}>!Edvance Platform</Link>
 
       <div className="nav-center">
         {navItems.map((item) => (
@@ -94,6 +94,7 @@ const Navbar = () => {
               src={profileAvatar}
               alt="Profile"
               onClick={() => setDropdownOpen(!dropdownOpen)}
+              style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }}
             />
             {dropdownOpen && (
               <div className="dropdown-menu">
