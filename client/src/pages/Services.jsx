@@ -27,31 +27,36 @@ const Services = () => {
     {
       icon: FiBookOpen,
       title: "AI PDF Summarizer",
-      description: "Instantly summarize lengthy PDFs and documents. Extract key points, save time, and understand complex information in seconds.",
+      description: "Instantly summarize lengthy PDFs and documents. Extract key points, highlight important passages, and turn long reads into clear, usable insights in seconds.",
+      price: "Starting at ₹499 / mo",
       slug: "ai-pdf-summarizer"
     },
     {
       icon: FiUsers,
       title: "AI Chatbot Assistant",
-      description: "Get instant answers to any question. Our intelligent chatbot provides accurate responses 24/7 to help you learn faster.",
+      description: "Get instant answers to any question. Our intelligent chatbot provides accurate responses 24/7, helping you learn faster and stay productive across tasks.",
+      price: "Starting at ₹399 / mo",
       slug: "ai-chatbot-assistant"
     },
     {
       icon: FiTrendingUp,
       title: "Voice Doubt Solver",
-      description: "Ask questions by speaking naturally. Our AI understands your doubts and provides clear, detailed solutions instantly.",
+      description: "Ask questions by speaking naturally. The AI listens, understands your doubts, and delivers clear, step-by-step answers with voice guidance.",
+      price: "Starting at ₹449 / mo",
       slug: "voice-doubt-solver"
     },
     {
       icon: FiAward,
       title: "Project Support AI",
-      description: "Receive step-by-step guidance for your projects, coding challenges, and assignments. Get expert help when you need it most.",
+      description: "Receive step-by-step guidance for your projects, coding challenges, and assignments. Get practical support designed to help you complete work with confidence.",
+      price: "Starting at ₹599 / mo",
       slug: "project-support-ai"
     },
     {
       icon: FiStar,
       title: "Study Assistant",
-      description: "Your personal study companion offering notes organization, concept explanations, exam preparation, and personalized learning paths.",
+      description: "Organize notes, explain concepts, and prepare for exams with a personal AI companion. Stay focused with tailored learning paths and quick concept help.",
+      price: "Starting at ₹349 / mo",
       slug: "study-assistant"
     }
   ];
@@ -253,8 +258,8 @@ const Services = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            {/* Cards 1, 2, 3 - in grid */}
-            {services.slice(0, 3).map((service, index) => (
+            {/* All Service Cards in Clean Grid */}
+            {services.map((service, index) => (
               <motion.div
                 key={service.slug || index}
                 className="service-card-wrapper"
@@ -267,30 +272,11 @@ const Services = () => {
                   icon={service.icon}
                   title={service.title}
                   description={service.description}
+                  price={service.price}
                   onProceed={() => handleServiceClick(service)}
                 />
               </motion.div>
             ))}
-
-            {/* Cards 4, 5 - centered in second row */}
-            <div className="services-row-2-wrapper">
-              {services.slice(3, 5).map((service, index) => (
-                <motion.div
-                  key={service.slug || index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: (index + 3) * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <ServiceCard
-                    icon={service.icon}
-                    title={service.title}
-                    description={service.description}
-                    onProceed={() => handleServiceClick(service)}
-                  />
-                </motion.div>
-              ))}
-            </div>
           </motion.div>
         </div>
       </section>
