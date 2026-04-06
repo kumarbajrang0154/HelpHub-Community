@@ -17,54 +17,23 @@ import ScrollProgress from "./components/ScrollProgress";
 
 const App = () => {
   return (
-<<<<<<< HEAD
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route
-            path="/services"
-            element={
-              <ProtectedRoute>
-                <Services />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/tool/:serviceName"
-            element={
-              <ProtectedRoute>
-                <Tool />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/chat" element={<ChatFullScreen />} />
-        </Routes>
-        <Chatbot />
-        <GlobalBackButton />
-      </Router>
-    </AuthProvider>
-  );
-};
-=======
     <ThemeProvider>
       <ToastProvider>
         <AuthProvider>
           <Router>
+            <ScrollProgress />
+            <Chatbot />
+            <GlobalBackButton />
+            
             <Routes>
+              {/* Public Pages - with Global Navbar & Footer */}
               <Route path="/" element={<Home />} />
+              
+              {/* Auth Pages - no Navbar/Footer */}
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              
+              {/* Protected Pages - with Global Navbar & Footer */}
               <Route
                 path="/services"
                 element={
@@ -73,25 +42,32 @@ const App = () => {
                   </ProtectedRoute>
                 }
               />
+              
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              
               <Route
                 path="/tool/:serviceName"
                 element={
                   <ProtectedRoute>
                     <Tool />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route path="/chat" element={<ChatFullScreen />} />
-              </Routes>
-              <Chatbot />
-              <GlobalBackButton />
-              <ScrollProgress />
-            </Router>
-          </AuthProvider>
-        </ToastProvider>
-      </ThemeProvider>
-    );
-  };
->>>>>>> 749c864 (AI Chatbot and Universal Back button added by Bajrang Kumar)
+                  </ProtectedRoute>
+                }
+              />
+              
+              <Route path="/chat" element={<ChatFullScreen />} />
+            </Routes>
+          </Router>
+        </AuthProvider>
+      </ToastProvider>
+    </ThemeProvider>
+  );
+};
 
 export default App;

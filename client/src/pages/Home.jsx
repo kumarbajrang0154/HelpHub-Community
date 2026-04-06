@@ -1,6 +1,6 @@
-﻿import React from "react";
+﻿import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ServiceCard from "../components/ServiceCard";
@@ -11,6 +11,19 @@ import { FiArrowRight, FiPlay, FiUsers, FiBookOpen, FiTrendingUp, FiAward, FiChe
 
 const Home = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Handle scroll-to when returning from other pages
+  useEffect(() => {
+    if (location.state?.scrollTarget) {
+      setTimeout(() => {
+        const element = document.getElementById(location.state.scrollTarget);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 300);
+    }
+  }, [location.state?.scrollTarget]);
 
   const services = [
     {

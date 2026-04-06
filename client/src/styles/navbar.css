@@ -2,7 +2,8 @@
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 15px 40px;
+  height: 38px;
+  padding: 0 20px;
 
   display: flex;
   justify-content: space-between;
@@ -19,12 +20,13 @@
 
 /* 🔥 BRAND/LOGO */
 .brand {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   background: transparent;
   border: none;
   color: #38bdf8;
+  text-decoration: none;
   transition: 0.3s;
 }
 
@@ -46,10 +48,28 @@
   cursor: pointer;
   transition: 0.3s;
   font-weight: 500;
+  position: relative;
+  padding-bottom: 5px;
 }
 
 .nav-link:hover {
   color: #38bdf8;
+}
+
+/* Active state styling for nav links */
+.nav-link-active {
+  color: #38bdf8;
+}
+
+/* Animated underline for active nav link */
+.nav-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+  border-radius: 2px;
 }
 
 /* 🔥 NAV ACTIONS */
@@ -72,8 +92,8 @@
 
 /* 🔥 AVATAR IMAGE */
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
@@ -83,13 +103,12 @@
 
 .avatar:hover {
   border-color: #0ea5e9;
-  transform: scale(1.1);
 }
 
 /* 🔥 DROPDOWN MENU */
 .dropdown-menu {
   position: absolute;
-  top: 50px;
+  top: 38px;
   right: 0;
   background: rgba(15, 23, 42, 0.95);
   border: 1px solid #38bdf8;
@@ -175,7 +194,7 @@
 /* 🔥 MOBILE MENU */
 .mobile-menu {
   position: absolute;
-  top: 60px;
+  top: 38px;
   right: 20px;
   background: rgba(15, 23, 42, 0.95);
   border-radius: 8px;

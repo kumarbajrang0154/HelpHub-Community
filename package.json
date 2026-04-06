@@ -15,7 +15,7 @@
   },
   "name": "helphub-community",
   "version": "1.0.0",
-  "description": "<<<<<<< HEAD\r # HelpHub-Community\r =======",
+  "description": "AI-powered student help platform",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

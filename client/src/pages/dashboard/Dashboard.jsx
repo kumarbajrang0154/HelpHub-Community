@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import axios from "../../services/axios";
 import { getProfile } from "../../services/authApi";
+import { FiBookmark, FiClock, FiCheckCircle } from "react-icons/fi";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -40,69 +44,136 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
+  const getStatusIcon = (status) => {
+    switch (status) {
+      case "completed":
+        return <FiCheckCircle size={18} className="text-green-400" />;
+      case "pending":
+        return <FiClock size={18} className="text-yellow-400" />;
+      default:
+        return <FiBookmark size={18} className="text-blue-400" />;
+    }
+  };
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "completed":
+        return "status-completed";
+      case "pending":
+        return "status-pending";
+      default:
+        return "status-default";
+    }
+  };
+
   return (
-    <div className="p-6 text-white min-h-screen bg-black">
-      {/* ✅ LOADING */}
-      {loading && <p className="text-center">Loading...</p>}
+    <div className="app">
+      <Navbar />
 
-      {/* ✅ ERROR */}
-      {error && (
-        <p className="text-red-500 text-center">Error: {error}</p>
-      )}
+      <section className="hero-section dashboard-section">
+        <div className="section-container">
+          
+          {/* 🎯 ERROR STATE */}
+          {error && !loading && (
+            <motion.div
+              className="error-alert"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <p>⚠️ {error}</p>
+            </motion.div>
+          )}
 
-      {/* ✅ USER PROFILE SECTION */}
-      {!loading && user && (
-        <div className="mb-8 bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-800">
-          <h1 className="text-3xl font-bold mb-4">Welcome, {user.name}!</h1>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <p className="text-gray-400 text-sm">Full Name</p>
-              <p className="text-lg font-semibold">{user.name}</p>
+          {/* ⏳ LOADING STATE */}
+          {loading && (
+            <div className="loading-container">
+              <div className="spinner"></div>
+              <p>Loading your dashboard...</p>
             </div>
-            <div>
-              <p className="text-gray-400 text-sm">Email Address</p>
-              <p className="text-lg font-semibold">{user.email}</p>
-            </div>
-          </div>
-        </div>
-      )}
+          )}
 
-      {/* ✅ REQUESTS SECTION */}
-      <div>
-        <h2 className="text-2xl font-bold mb-4">Your Requests</h2>
-
-        {!loading && !error && requests.length === 0 && (
-          <p className="text-gray-400">No requests found</p>
-        )}
-
-        {!loading && !error && requests.length > 0 && (
-          <div className="grid gap-4">
-            {requests.map((req) => (
-              <div
-                key={req._id}
-                className="bg-gray-800 p-4 rounded-xl shadow-md border border-gray-700 hover:border-gray-600 transition"
-              >
-                <h3 className="text-lg font-semibold">
-                  {req.title || "No Title"}
-                </h3>
-
-                <p className="text-gray-300 mt-2">
-                  {req.description || "No Description"}
-                </p>
-
-                <div className="flex justify-between items-center mt-4">
-                  <span className="text-sm inline-block bg-blue-900 px-3 py-1 rounded">
-                    Status: <span className="font-semibold">{req.status || "pending"}</span>
-                  </span>
-                  <span className="text-xs text-gray-500">
-                    {new Date(req.createdAt).toLocaleDateString()}
-                  </span>
+          {/* 👤 USER PROFILE SECTION */}
+          {!loading && user && (
+            <motion.div
+              className="dashboard-profile-card"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="profile-header">
+                <img
+                  src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
+                    user.name || "User"
+                  )}&background=0f172a&color=38bdf8&rounded=true&size=100`}
+                  alt="Profile"
+                  className="profile-avatar"
+                />
+                <div className="profile-details">
+                  <h1 className="text-3xl font-bold mb-2">Welcome, {user.name}! 👋</h1>
+                  <p className="text-gray-400">📧 {user.email}</p>
+                  <p className="text-gray-500 text-sm">
+                    Member since {new Date(user.createdAt).toLocaleDateString()}
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
-      </div>
+            </motion.div>
+          )}
+
+          {/* 📋 REQUESTS SECTION */}
+          <motion.div
+            className="dashboard-requests-section"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <h2 className="section-subtitle mb-6">Your Requests</h2>
+
+            {!loading && !error && requests.length === 0 && (
+              <div className="empty-state">
+                <FiBookmark size={48} />
+                <p>No requests yet. Start by making your first request!</p>
+              </div>
+            )}
+
+            {!loading && !error && requests.length > 0 && (
+              <div className="requests-grid">
+                {requests.map((req, index) => (
+                  <motion.div
+                    key={req._id}
+                    className="request-card"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className="request-header">
+                      <h3 className="request-title">{req.title || "Untitled Request"}</h3>
+                      <div className={`request-status ${getStatusColor(req.status)}`}>
+                        {getStatusIcon(req.status)}
+                        <span className="capitalize ml-2">{req.status || "pending"}</span>
+                      </div>
+                    </div>
+
+                    <p className="request-description">
+                      {req.description || "No description provided"}
+                    </p>
+
+                    <div className="request-footer">
+                      <span className="request-date">
+                        {new Date(req.createdAt).toLocaleDateString()}
+                      </span>
+                      <span className="request-id">ID: {req._id.slice(0, 8)}</span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </motion.div>
+
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 };

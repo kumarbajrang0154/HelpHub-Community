@@ -1,36 +1,45 @@
+import React from "react";
 import { motion } from "framer-motion";
+import { FiArrowRight } from "react-icons/fi";
 
-const ServiceCard = ({ icon: Icon, image, title, description, price, onProceed }) => {
+const ServiceCard = ({ icon: Icon, title, description, label, onProceed }) => {
   return (
-    <motion.article
+    <motion.div
       className="service-card"
-      whileHover={{ y: -8 }}
+      whileHover={{ translateY: -8 }}
       whileTap={{ scale: 0.98 }}
-      transition={{ duration: 0.25 }}
+      transition={{ duration: 0.3 }}
     >
-      {image ? (
-        <img className="service-image" src={image} alt={title} />
-      ) : (
-        <div className="service-card-top">
-          <div className="service-icon">{Icon ? <Icon size={24} /> : null}</div>
-          <span className="service-label">Premium AI Tool</span>
+      {/* Icon */}
+      <div className="service-icon">
+        {Icon && <Icon size={28} />}
+      </div>
+
+      {/* Label Badge */}
+      {label && (
+        <div className="service-label-badge">
+          {label}
         </div>
       )}
 
-      <div className="service-card-copy">
-        <h3>{title}</h3>
-        <p>{description}</p>
-      </div>
+      {/* Title */}
+      <h3 className="service-heading">{title}</h3>
 
-      <div className="service-card-footer">
-        <span className="service-price">{price || "Premium"}</span>
-        {onProceed ? (
-          <button className="service-action" type="button" onClick={onProceed}>
-            Try Now
-          </button>
-        ) : null}
-      </div>
-    </motion.article>
+      {/* Description */}
+      <p className="service-text">{description}</p>
+
+      {/* CTA Button */}
+      <motion.button
+        className="service-cta"
+        onClick={onProceed}
+        type="button"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        <span>Get Started</span>
+        <FiArrowRight size={18} />
+      </motion.button>
+    </motion.div>
   );
 };
 

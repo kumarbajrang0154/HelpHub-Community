@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 # HelpHub-Community
-=======
 
 A modern, full-stack web application where students can request help for Java projects, bug fixing, website development, and assignments.
 
@@ -230,4 +228,3 @@ MIT License - Feel free to use this project!
 
 **Last Updated:** March 2026
 **Status:** ✅ Fully Configured & Bug-Free
->>>>>>> e2f09d2 (Starting to built this project)
