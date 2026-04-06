@@ -250,7 +250,7 @@ const Services = () => {
             </p>
           </motion.div>
 
-          {/* Services Grid - 3+2 Layout */}
+          {/* Services Grid - 3 + centered 2 cards */}
           <motion.div
             className="services-grid-container"
             initial={{ opacity: 0 }}
@@ -258,8 +258,7 @@ const Services = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            {/* All Service Cards in Clean Grid */}
-            {services.map((service, index) => (
+            {services.slice(0, 3).map((service, index) => (
               <motion.div
                 key={service.slug || index}
                 className="service-card-wrapper"
@@ -278,6 +277,27 @@ const Services = () => {
               </motion.div>
             ))}
           </motion.div>
+
+          <div className="services-row-2-wrapper">
+            {services.slice(3, 5).map((service, index) => (
+              <motion.div
+                key={service.slug || index}
+                className="service-card-wrapper"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <ServiceCard
+                  icon={service.icon}
+                  title={service.title}
+                  description={service.description}
+                  price={service.price}
+                  onProceed={() => handleServiceClick(service)}
+                />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
